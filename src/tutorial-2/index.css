@@ -7,7 +7,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.wrapper {
+  padding: 0 50px;
+}
+.form {
+  margin: 0 auto;
+  width: 30%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.email,
+.pass,
+.btn {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.btn {
+  max-width: 30%;
 }
