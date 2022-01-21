@@ -27,8 +27,25 @@ if (localStorage.getItem('todolist')) {
 }
 
 //handleClickRemove(index) - функция, которая будет получать индекс задачи и удалять её по индексу.
-const handleClickRemove = index => {
+
+// Version #1
+/* const handleClickRemove = index => {
   tasks.splice(index, 1);
+  updateStorage();
+  render();
+}; */
+
+// Version #2
+const handleClickRemove = index => {
+  const newTasksArr = tasks.filter((_, i) => {
+    if (index !== i) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  tasks = newTasksArr;
   updateStorage();
   render();
 };
