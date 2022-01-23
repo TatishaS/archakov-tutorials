@@ -1,0 +1,28 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: #202020;
+  background: #b2e1fc;
+}
+
+.list {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.list__item {
+  max-width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+.item__btn {
+  margin-bottom: 15px;
+}
+.item__btn {
+  margin-left: 20px;
+}
