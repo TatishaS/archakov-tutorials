@@ -11,8 +11,3 @@ body {
 .row {
   display: flex;
 }
-
-.MuiTextField-root,
-.MuiButton-root {
-  margin: 0 15px !important;
-}
