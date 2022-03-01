@@ -22,8 +22,10 @@ function App() {
   }, [commentsArr]);
 
   const addComment = (commentObj, e) => {
+    console.log(commentObj);
+
     e.preventDefault();
-    setCommentsArr([commentObj, ...commentsArr]);
+    setCommentsArr((...prevState) => [commentObj, ...prevState]);
   };
 
   return (
