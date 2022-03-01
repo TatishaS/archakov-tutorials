@@ -25,7 +25,8 @@ function App() {
     console.log(commentObj);
 
     e.preventDefault();
-    setCommentsArr((...prevState) => [commentObj, ...prevState]);
+    setCommentsArr(prevState => [commentObj, ...prevState]);
+    console.log(commentsArr);
   };
 
   return (
