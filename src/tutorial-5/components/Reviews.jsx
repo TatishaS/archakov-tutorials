@@ -8,6 +8,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Typography from '@mui/material/Typography';
 
 function Reviews({ comments }) {
+  const options = {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  };
+
   return (
     <Box
       sx={{
@@ -40,9 +50,15 @@ function Reviews({ comments }) {
                     variant="body2"
                     color="text.primary"
                     component="span"
+                    sx={{
+                      display: 'block',
+                    }}
                   >
                     {item.text}
                   </Typography>
+                  <span>
+                    {item.createdAt.toLocaleDateString('ru', options)}
+                  </span>
                 </React.Fragment>
               }
             />

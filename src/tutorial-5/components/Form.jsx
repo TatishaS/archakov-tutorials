@@ -5,43 +5,33 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 function Form({ onAddComment }) {
-  const [fullName, setFullName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [text, setText] = React.useState('');
+  const [inputs, setInputs] = React.useState({
+    fullName: '',
+    email: '',
+    text: '',
+  });
 
-  const formatCurrentDate = () => {
-    const now = new Date();
-    const options = {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    };
-    const date = new Intl.DateTimeFormat('en-GB', options).format(now);
-    return date;
-  };
+  const { fullName = '', email = '', text = '' } = inputs;
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (fullName.trim().length && email.trim().length && text.trim().length) {
-      const date = formatCurrentDate();
-
+    if (fullName.trim() && email.trim() && text.trim()) {
       const newReview = {
         fullName: fullName.trim(),
         email: email.trim(),
-        createdAt: date,
+        createdAt: new Date(),
         text: text.trim(),
+        id: inputs.length ? inputs[inputs.length - 1].id + 1 : 0,
       };
-      console.log(newReview);
 
-      onAddComment(newReview, e);
-      setFullName('');
-      setEmail('');
-      setText('');
+      onAddComment(newReview);
+
+      setInputs({
+        fullName: '',
+        email: '',
+        text: '',
+      });
     } else {
       alert('У вас не заполнены поля');
     }
@@ -77,7 +67,7 @@ function Form({ onAddComment }) {
           fullWidth
           value={fullName}
           onChange={e => {
-            setFullName(e.target.value);
+            setInputs({ ...inputs, fullName: e.target.value });
           }}
         />
         <TextField
@@ -87,7 +77,7 @@ function Form({ onAddComment }) {
           fullWidth
           value={email}
           onChange={e => {
-            setEmail(e.target.value);
+            setInputs({ ...inputs, email: e.target.value });
           }}
         />
         <TextField
@@ -99,7 +89,7 @@ function Form({ onAddComment }) {
           fullWidth
           value={text}
           onChange={e => {
-            setText(e.target.value);
+            setInputs({ ...inputs, text: e.target.value });
           }}
         />
         <Button type="submit" variant="contained" fullWidth>

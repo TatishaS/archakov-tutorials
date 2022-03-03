@@ -7,26 +7,20 @@ import Form from './components/Form';
 function App() {
   const [commentsArr, setCommentsArr] = React.useState([]);
 
+  /* ПОЛУЧАЕМ КОММЕНТЫ ИЗ localStorage */
+  // ПРОВЕРИТЬ, почему комменты стираются из localStorage при обновлении страницы
   React.useEffect(() => {
-    if (localStorage.getItem('comments')) {
-      const localComments = JSON.parse(localStorage.getItem('comments'));
-
-      setCommentsArr([...localComments]);
-    } else {
-      setCommentsArr([]);
-    }
+    const localComments = JSON.parse(localStorage.getItem('comments')) || [];
+    setCommentsArr(localComments);
   }, []);
 
+  /* СОХРАНЯЕМ КОММЕНТЫ В localStroage */
   React.useEffect(() => {
     localStorage.setItem('comments', JSON.stringify(commentsArr));
   }, [commentsArr]);
 
-  const addComment = (commentObj, e) => {
-    console.log(commentObj);
-
-    e.preventDefault();
-    setCommentsArr(prevState => [commentObj, ...prevState]);
-    console.log(commentsArr);
+  const addComment = commentObj => {
+    setCommentsArr([commentObj, ...commentsArr]);
   };
 
   return (
