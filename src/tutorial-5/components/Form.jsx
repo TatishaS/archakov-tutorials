@@ -11,27 +11,42 @@ function Form({ onAddComment }) {
     text: '',
   });
 
-  const { fullName = '', email = '', text = '' } = inputs;
+  const { fullName, email, text } = inputs;
 
   const handleSubmit = e => {
     e.preventDefault();
 
     if (fullName.trim() && email.trim() && text.trim()) {
-      const newReview = {
-        fullName: fullName.trim(),
-        email: email.trim(),
-        createdAt: new Date(),
-        text: text.trim(),
-        id: inputs.length ? inputs[inputs.length - 1].id + 1 : 0,
+      const now = new Date();
+      const options = {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
       };
 
-      onAddComment(newReview);
+      if (now) {
+        const newReview = {
+          fullName: fullName.trim(),
+          email: email.trim(),
+          createdAt: now.toLocaleDateString('ru-RU', options),
+          text: text.trim(),
+          id: inputs.length ? inputs[inputs.length - 1].id + 1 : 0,
+        };
 
-      setInputs({
-        fullName: '',
-        email: '',
-        text: '',
-      });
+        console.log(newReview.createdAt);
+
+        onAddComment(newReview);
+
+        setInputs({
+          fullName: '',
+          email: '',
+          text: '',
+        });
+      }
     } else {
       alert('У вас не заполнены поля');
     }

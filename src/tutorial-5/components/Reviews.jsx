@@ -1,22 +1,22 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Typography,
+  Button,
+} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Typography from '@mui/material/Typography';
 
-function Reviews({ comments }) {
-  const options = {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  };
+function Reviews({ comments, onRemove }) {
+  /*   const handleClickRemove = id => {
+    const newState = comments.filter(obj => {
+      return obj.id !== id;
+    });
+    return newState;
+  }; */
 
   return (
     <Box
@@ -56,12 +56,11 @@ function Reviews({ comments }) {
                   >
                     {item.text}
                   </Typography>
-                  <span>
-                    {item.createdAt.toLocaleDateString('ru', options)}
-                  </span>
+                  <span>{item && item.createdAt}</span>
                 </React.Fragment>
               }
             />
+            <Button /* onClick={() => onRemove(item.id)} */>X</Button>
           </ListItem>
         ))}
       </List>

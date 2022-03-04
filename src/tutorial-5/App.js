@@ -8,10 +8,13 @@ function App() {
   const [commentsArr, setCommentsArr] = React.useState([]);
 
   /* ПОЛУЧАЕМ КОММЕНТЫ ИЗ localStorage */
-  // ПРОВЕРИТЬ, почему комменты стираются из localStorage при обновлении страницы
+
   React.useEffect(() => {
-    const localComments = JSON.parse(localStorage.getItem('comments')) || [];
-    setCommentsArr(localComments);
+    if (localStorage.getItem('comments')) {
+      const localComments = JSON.parse(localStorage.getItem('comments')) || [];
+
+      setCommentsArr(localComments);
+    }
   }, []);
 
   /* СОХРАНЯЕМ КОММЕНТЫ В localStroage */
@@ -23,6 +26,11 @@ function App() {
     setCommentsArr([commentObj, ...commentsArr]);
   };
 
+  /* const onRemoveItem = id => {
+    console.log('Был клик');
+    console.log(id);
+  };
+ */
   return (
     <Stack
       sx={{
@@ -32,7 +40,7 @@ function App() {
       }}
     >
       {commentsArr.length > 0 ? (
-        <Reviews comments={commentsArr} />
+        <Reviews comments={commentsArr} /* onRemove={onRemoveItem} */ />
       ) : (
         <EmptyBlock />
       )}
