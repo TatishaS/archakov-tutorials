@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function Form({ onAddComment }) {
+function Form({ onAddComment, comments }) {
   const [inputs, setInputs] = React.useState({
     fullName: '',
     email: '',
@@ -28,25 +28,26 @@ function Form({ onAddComment }) {
         second: '2-digit',
       };
 
-      if (now) {
-        const newReview = {
-          fullName: fullName.trim(),
-          email: email.trim(),
-          createdAt: now.toLocaleDateString('ru-RU', options),
-          text: text.trim(),
-          id: inputs.length ? inputs[inputs.length - 1].id + 1 : 0,
-        };
+      /* СОХРАНЯЕМ НОВЫЙ ОТЗЫВ В ВИДЕ ОБЪЕКТА */
 
-        console.log(newReview.createdAt);
+      const newReview = {
+        fullName: fullName,
+        email: email,
+        text: text,
+        createdAt: now.toLocaleDateString('ru-RU', options),
+        id: comments.length ? comments.length + 1 : 0,
+      };
 
-        onAddComment(newReview);
+      /* ДОБАВЛЯЕМ НОВЫЙ ОТЗЫВ В МАССИВ */
 
-        setInputs({
-          fullName: '',
-          email: '',
-          text: '',
-        });
-      }
+      onAddComment(newReview);
+
+      /* ОЧИЩАЕМ ИНПУТЫ */
+      setInputs({
+        fullName: '',
+        email: '',
+        text: '',
+      });
     } else {
       alert('У вас не заполнены поля');
     }

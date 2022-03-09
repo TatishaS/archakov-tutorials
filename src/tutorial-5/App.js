@@ -18,19 +18,24 @@ function App() {
   }, []);
 
   /* СОХРАНЯЕМ КОММЕНТЫ В localStroage */
+
   React.useEffect(() => {
     localStorage.setItem('comments', JSON.stringify(commentsArr));
   }, [commentsArr]);
+
+  /* ДОБАВЛЯЕМ КОММЕНТ В МАССИВ */
 
   const addComment = commentObj => {
     setCommentsArr([commentObj, ...commentsArr]);
   };
 
-  /* const onRemoveItem = id => {
-    console.log('Был клик');
-    console.log(id);
+  /* УДАЛЯЕМ КОММЕНТ */
+
+  const onRemoveItem = id => {
+    const newArr = commentsArr.filter(obj => obj.id !== id);
+    setCommentsArr(newArr);
   };
- */
+
   return (
     <Stack
       sx={{
@@ -40,11 +45,11 @@ function App() {
       }}
     >
       {commentsArr.length > 0 ? (
-        <Reviews comments={commentsArr} /* onRemove={onRemoveItem} */ />
+        <Reviews comments={commentsArr} onRemove={onRemoveItem} />
       ) : (
         <EmptyBlock />
       )}
-      <Form onAddComment={addComment} />
+      <Form comments={commentsArr} onAddComment={addComment} />
     </Stack>
   );
 }

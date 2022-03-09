@@ -11,13 +11,6 @@ import {
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Reviews({ comments, onRemove }) {
-  /*   const handleClickRemove = id => {
-    const newState = comments.filter(obj => {
-      return obj.id !== id;
-    });
-    return newState;
-  }; */
-
   return (
     <Box
       sx={{
@@ -60,7 +53,7 @@ function Reviews({ comments, onRemove }) {
                 </React.Fragment>
               }
             />
-            <Button /* onClick={() => onRemove(item.id)} */>X</Button>
+            <Button onClick={() => onRemove(item.id)}>X</Button>
           </ListItem>
         ))}
       </List>
